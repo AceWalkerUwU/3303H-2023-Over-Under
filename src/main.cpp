@@ -1,4 +1,6 @@
 #include "main.h"
+#include "display/lv_core/lv_obj.h"
+#include "gif-pros/gifclass.hpp"
 
 
 /////
@@ -88,7 +90,7 @@ void initialize() {
 
   // Initialize chassis and auton selector
   chassis.initialize();
-  ez::as::initialize();
+  // ez::as::initialize();
 }
 
 
@@ -157,6 +159,12 @@ void autonomous() {
 void opcontrol() {
   // This is preference to what you like to drive on.
   chassis.set_drive_brake(MOTOR_BRAKE_COAST);
+
+  lv_obj_t* obj = lv_obj_create(lv_scr_act(), NULL);
+  lv_obj_set_size(obj, 250, 250);
+  lv_obj_align(obj, NULL, LV_ALIGN_CENTER, 0, 0);
+
+  Gif gif("/usd/rotating-chips.gif", obj);
 
   while (true) {
 
